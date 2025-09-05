@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cart Page</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>Your Cart</h2>
+  <ul id="cart-items" style="list-style:none; padding-left:0;"></ul>
+  <p>Total USD: $<span id="total-usd">0</span></p>
+  <p>Total INR: ₹<span id="total-inr">0</span></p>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+const usdToInr = 83;
+
+function renderCart(){
+  const cartList = document.getElementById("cart-items");
+  cartList.innerHTML = "";
+  let totalUsd = 0;
+  if(cart.length===0){
+    cartList.innerHTML="<li>Your cart is empty</li>";
+  } else {
+    cart.forEach(item=>{
+      const li=document.createElement("li");
+      li.innerHTML=`${item.name} (${item.size}) x ${item.qty} = $${(item.price*item.qty).toFixed(2)}
+        <button onclick="changeQty('${item.shortName}','${item.size}',-1)">-</button>
+        <button onclick="changeQty('${item.shortName}','${item.size}',1)">+</button>`;
+      cartList.appendChild(li);
+      totalUsd += item.price*item.qty;
+    });
+  }
+  document.getElementById("total-usd").innerText=totalUsd.toFixed(2);
+  document.getElementById("total-inr").innerText=(totalUsd*usdToInr).toFixed(0);
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function changeQty(shortName,size,delta){
+  let item = cart.find(i=>i.shortName===shortName && i.size===size);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty<=0) cart = cart.filter(i=>!(i.shortName===shortName && i.size===size));
+  renderCart();
+}
+
+renderCart();
+</script>
+
+</body>
+</html>
