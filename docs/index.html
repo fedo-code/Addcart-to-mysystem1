@@ -55,12 +55,19 @@
             <li id="navAboutButton">
               <a href="/about" onclick="$dc.loadAbout()">                       
                 <span class="glyphicon glyphicon-info-sign"></span><br class="hidden-xs"> About</a>
-             <li id="navCartButton">
-              <a href="#" onclick="openCart(event)">
-                <span class="glyphicon glyphicon-shopping-cart"></span>
-                <br class="hidden-xs"> Cart (<span id="cart-count">0</span>)
-              </a>
-            </li>
+            
+                 </li>
+              
+                 <li id="navCartButton">
+  <a id="cartBtn" href="#" class="navbar-link">
+    <span class="glyphicon glyphicon-shopping-cart"></span>
+    <br class="hidden-xs"> Cart (<span id="cart-count">0</span>)
+  </a>
+</li>
+
+
+
+
 
             <li id="phone" class="hidden-xs">
               <a href="tel:410-602-5008"> 
@@ -85,6 +92,7 @@
 <!-- Cart Overlay --> 
 <div id="cart-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
 background: rgba(0,0,0,0.5); z-index:9999;">
+  
   <div style="background:#fff8dc; color:#000; width:500px; max-width:90%; margin:50px auto; padding:20px; position:relative; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.3);">
     <h3 style="color:#000;">Your Cart</h3>
     <ul id="cart-items" style="list-style:none; padding-left:0; color:#000;"></ul>
@@ -94,10 +102,12 @@ background: rgba(0,0,0,0.5); z-index:9999;">
     <!-- ✅ Pay Now button container -->
     <div id="pay-btn-container" style="margin-bottom:15px;"></div>
 
-    <!-- Close button with gap above -->
+    <!-- Sirf Close button se hi band hoga -->
     <button onclick="closeCart()" class="btn btn-default mt-2">Close</button>
   </div>
 </div>
+
+
 
 
 
